@@ -36,8 +36,11 @@ const options = {
 
 const { port, mode } =  parseArgs(process.argv.slice(2), options)
 
+//port
+let server_port = process.env.YOUR_PORT || process.env.PORT || 80;
+let server_host = process.env.YOUR_HOST || '0.0.0.0';
+
 //setting server
-app.set("port", 8080 || process.env.PORT)
 app.set("views", path.join(__dirname, "public/views"))
 app.set("view engine", "ejs")
 app.set('json spaces', 2)
@@ -93,6 +96,6 @@ io.on("connection", async (socket) => {
 // app.listen(app.get("port"), () => console.log(`Server listen on port ${app.get("port")}`))
 
 // starting server
-httpServer.listen(app.get("port"), process.env.HOST,() => console.log(`Server listen on http://${process.env.HOST}:${app.get("port")} - MODE: ${mode}`))
-const server = new ServerClusterFork()
-server[mode](port, httpServer)
+httpServer.listen((server_port), server_host,() => console.log(`Server listen on http://${server_host}:${server_port} - MODE: ${mode}`))
+// const server = new ServerClusterFork()
+// server[mode](port, httpServer)
