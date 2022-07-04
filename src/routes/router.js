@@ -1,5 +1,4 @@
-const { Router } = require("express")
-const { generarProducts } = require("../public/js/faker")   
+const { Router } = require("express") 
 const router = Router()
 const passport = require("passport")
 const { fork } = require("child_process")
