@@ -90,9 +90,9 @@ io.on("connection", async (socket) => {
 
 })
 
-app.listen(app.get("port"), () => console.log(`Server listen on port ${app.get("port")}`))
+// app.listen(app.get("port"), () => console.log(`Server listen on port ${app.get("port")}`))
 
-//starting server
+// starting server
 // httpServer.listen(app.get("port"), process.env.HOST,() => console.log(`Server listen on http://${process.env.HOST}:${app.get("port")} - MODE: ${mode}`))
-// const server = new ServerClusterFork()
-// server[mode](port, httpServer)
+const server = new ServerClusterFork()
+server[mode](port, httpServer)
