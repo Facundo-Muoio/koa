@@ -16,11 +16,11 @@ router.get("/",(req, res) =>{
    res.render("index")
 })
 
-router.get("/api/productos-test", (req, res) => {
-    const productosFake = generarProducts()
-    logger.error(`error al cargar los productos`)
-    res.render("productos-test", {productos: productosFake})
-})
+// router.get("/api/productos-test", (req, res) => {
+//     const productosFake = generarProducts()
+//     logger.error(`error al cargar los productos`)
+//     res.render("productos-test", {productos: productosFake})
+// })
 
 router.get("/api/registration", (req, res) => {
     res.render("registration")
