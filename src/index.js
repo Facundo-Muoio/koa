@@ -29,16 +29,12 @@ const options = {
         m: "mode"
     }, 
     default: {
-         port: 8080 || process.env.PORT,
+         port:  process.env.PORT || process.env.YOUR_PORT,
          mode: "fork"
         } 
     }
 
 const { port, mode } =  parseArgs(process.argv.slice(2), options)
-
-//port
-let server_port = process.env.YOUR_PORT || process.env.PORT || 80;
-let server_host = process.env.YOUR_HOST || '0.0.0.0';
 
 //setting server
 app.set("views", path.join(__dirname, "public/views"))
@@ -93,9 +89,9 @@ io.on("connection", async (socket) => {
 
 })
 
-// app.listen(app.get("port"), () => console.log(`Server listen on port ${app.get("port")}`))
+
 
 // starting server
-httpServer.listen((server_port), server_host,() => console.log(`Server listen on http://${server_host}:${server_port} - MODE: ${mode}`))
-// const server = new ServerClusterFork()
-// server[mode](port, httpServer)
+// httpServer.listen((port),() => console.log(`Server listen on http://${process.env.YOUT_HOST}:${port} - MODE: ${mode}`))
+const server = new ServerClusterFork()
+server[mode](port, httpServer)

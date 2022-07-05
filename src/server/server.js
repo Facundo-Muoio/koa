@@ -43,9 +43,7 @@ class ServerClusterFork {
 
         } else {
             console.log(`Proceso Cluster: Puerto: ${PORT} - pid: ${process.pid}`)
-            server
-                .listen(PORT, () => { console.log(`Oyendo desde ${server.address().port} - http://localhost:${PORT}`) })
-                .on('error', error => console.log('error hubo', error))
+            server.listen(PORT, () => { console.log(`Oyendo desde ${server.address().port} - http://localhost:${PORT}`) }).on('error', error => console.log('error hubo', error))
         }
     }
 }
