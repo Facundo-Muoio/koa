@@ -25,12 +25,15 @@
     "forever-monitor": "^3.0.3",
     "minimist": "^1.2.6",
     "mongodb": "^4.6.0",
-    "mongoose": "^6.3.3",
+    "mongoose": "^6.5.0",
+    "mysql2": "^2.3.3",
     "normalizr": "^3.6.2",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
+    "sequelize": "^6.21.3",
     "socket.io": "^4.5.1",
-    "winston": "^3.7.2"
+    "winston": "^3.7.2",
+    "yargs": "^17.5.1"
   },
   "devDependencies": {
     "@faker-js/faker": "^6.3.1",

@@ -1,12 +1,8 @@
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
-const User = require("../models/user")
+const FactoryDao = require("../DAOS/FactoryDao")
 const bcrypt = require("bcrypt")
-
-function encryptPassword(password){
-    const salt = bcrypt.genSaltSync(10)
-    return bcrypt.hashSync(password, salt)
-}
+const dao = FactoryDao.getDao()
 
 function verifypassword(password, user){
     return bcrypt.compareSync(password, user.password)
@@ -17,7 +13,7 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser(async (id, done) => {
-    const user = await User.findById(id)
+    const user = await dao.getUserById(id)
     done(null, user)
 })
 
@@ -28,14 +24,11 @@ passport.use("registration", new LocalStrategy({
     passReqToCallback: true
 },
 async (req, email, password, done) => {
-    const user = await User.findOne({email:email})
+    const user = await dao.getUser(email)
     if(user){
         return done(null, false)
     } else {
-        const newUser = new User()
-        newUser.email = email,
-        newUser.password = encryptPassword(password)
-        await newUser.save()
+        const newUser = await dao.createUser(email, password)
         done(null, newUser)
     }
 }
@@ -44,10 +37,10 @@ async (req, email, password, done) => {
 passport.use("login", new LocalStrategy({
     usernameField: "email",
     passwordField: "password",
-    passReqToCallback: true
+    passReqToCallback: true 
 },
 async (req, email, password, done) => {
-    const user = await User.findOne({email: email})
+    const user = await dao.getUser(email)
     if(!user){
         return done(null, false)
     }

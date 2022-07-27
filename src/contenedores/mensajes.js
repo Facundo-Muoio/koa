@@ -1,9 +1,9 @@
 const mongoose = require("mongoose")
 const { Schema } = require("mongoose")
-const { connect } = require("../db/db")
+const { connectMongoDb } = require("../db/db")
 const { normalizeMensaje } = require("../public/js/normalizr")
 
-connect()
+connectMongoDb()
 
 const mensajeSchema = new Schema ({
     autor: {
