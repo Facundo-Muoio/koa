@@ -8,7 +8,8 @@ const { getInfo, getInfoCompression } = require("../controllers/infoController")
 const { loginRender, login, failLogin } = require("../controllers/loginController")
 const { logout } = require("../controllers/logoutController")
 const { rutasNoImplementadas } = require("../controllers/noImplementadosController")
-const getAllProducts = require("../controllers/productsController")
+const {getAllProducts, createProduct, updateProductById, deleteProductById} = require("../controllers/productsController")
+
 
 
 router.get("/",(req, res) =>{
@@ -35,6 +36,13 @@ router.get("/info", getInfo)
 router.get("/infoCompression", compression, getInfoCompression)
 
 router.get("/api/productos", getAllProducts)
+
+router.post("/api/productos", createProduct)
+
+router.put("/api/productos/:id", updateProductById)
+
+router.delete("/api/productos/:id", deleteProductById)
+
 
 router.get("*", rutasNoImplementadas)
 

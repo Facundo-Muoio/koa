@@ -1,21 +1,44 @@
 const { faker } = require("@faker-js/faker") 
 
+const productosFake = []
+
 function generarProducts(){
-    const productosFake = []
-    function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-     }
-    for(let i = 0; i < 5 ; i++){
-    let number = getRandomInt(1, 50)
-    let auto = "auto/" + number
-    let productoFake = {
-        nombre:  faker.vehicle.vehicle(),
-        precio:  faker.finance.amount(),
-        foto:  faker.image.imageUrl(`${auto}`)
-    }
-    productosFake.push(productoFake)
+    if(!productosFake.length){
+        for(let i = 0; i < 5 ; i++){
+            let productoFake = {
+                nombre:  faker.vehicle.vehicle(),
+                precio:  faker.finance.amount(),
+                foto:  faker.image.imageUrl({randomize: true}),
+                id: i 
+            }
+            productosFake.push(productoFake)
+        }
     }
     return productosFake
 }
 
-module.exports = generarProducts
+function createNewProduct(newProduct){
+    productosFake.push(newProduct)
+    return newProduct
+}
+
+function updateProduct(id, nombre, precio, foto){
+   nombre ? productosFake[id].nombre = nombre : ""
+   precio ? productosFake[id].precio = precio : ""
+   foto ? productosFake[id].foto = foto : ""
+   const productUpdated = productosFake[id]
+   return productUpdated
+}
+
+function deleteProduct(id){
+    const productDeleted = productosFake[id]
+    productosFake.splice(id, 1)
+    return productDeleted
+}
+
+function getProducts(){
+    return productosFake
+}
+
+
+module.exports = { generarProducts, createNewProduct, updateProduct, deleteProduct, getProducts }

@@ -19,6 +19,8 @@ const parseArgs = require("minimist")
 require("./passport/local-auth")
 require("dotenv").config()
 const ServerClusterFork  = require("./server/server")
+const { makeRequest } = require("./axios/axios")
+const { default: axios } = require("axios")
 
 
 
@@ -44,7 +46,7 @@ app.set('json spaces', 2)
 //middlewares
 app.use(express.static(path.join(__dirname, "public")))
 app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({extended: false}))
 app.use(cookieParser("secreto"))
 app.use(session({
     store: MongoStore.create({mongoUrl: process.env.MONGO_URL_SERVER, 
@@ -88,7 +90,6 @@ io.on("connection", async (socket) => {
     })
 
 })
-
 
 
 // starting server
