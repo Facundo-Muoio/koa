@@ -8,7 +8,7 @@ function generarProducts(){
             let productoFake = {
                 nombre:  faker.vehicle.vehicle(),
                 precio:  faker.finance.amount(),
-                foto:  faker.image.imageUrl({randomize: true}),
+                foto:  faker.image.imageUrl(),
                 id: i 
             }
             productosFake.push(productoFake)
@@ -31,9 +31,8 @@ function updateProduct(id, nombre, precio, foto){
 }
 
 function deleteProduct(id){
-    const productDeleted = productosFake[id]
-    productosFake.splice(id, 1)
-    return productDeleted
+    const productDeleted = productosFake.splice(id, 1)
+    return productDeleted[0]
 }
 
 function getProducts(){

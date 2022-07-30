@@ -1,6 +1,7 @@
-const axios = require("axios")
 const URL = "http://localhost:8080/api/productos"
 
+
+console.log("hello world")
 
 async function axiosGet(){
     await axios.get(URL)
@@ -19,7 +20,7 @@ async function axiosPost(){
         foto: "Ford KA Image"
     })
         .then((res) => {
-            console.log(res.data)
+            console.log("hemos añadido el elemento", res.data)
         })
         .catch((err) => {
             console.log(err)
@@ -33,7 +34,7 @@ async function axiosPut(){
         foto: "Peugeout foto"
     })
         .then((res) => {
-            console.log(res.data)
+            console.log("hemos actualizado el elemento", res.data)
         })
         .catch((err) => {
             console.log(err)
@@ -43,17 +44,15 @@ async function axiosPut(){
 function axiosDelete(){
     axios.delete("http://localhost:8080/api/productos/1")
         .then((res) => {
-            console.log(res.data)
+            console.log("hemos borrado el elemento", res.data)
         })
         .catch((err) => {
             console.log(err)
         })
 }
 
-//probando axios del lado del servidor
-// axiosGet()
-// axiosPost()
-// axiosPut()
-// axiosDelete()
-
-module.exports = {axiosGet, axiosPost, axiosPut, axiosDelete}
+//testeo de axios del lado del cliente
+axiosGet()
+axiosPost()
+axiosPut()
+axiosDelete()

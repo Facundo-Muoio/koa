@@ -29,8 +29,8 @@ const updateProductById = (req, res) => {
 
 const deleteProductById = (req, res) => {
     const { id } = req.params
-    const {nombre, precio, foto} = deleteProduct(id)
-    res.json({nombre, precio, foto})
+    const productDeleted = deleteProduct(id)
+    res.json({nombre: productDeleted.nombre, precio: productDeleted.precio, foto: productDeleted.foto, id: productDeleted.id})
 }
 
 module.exports = { getAllProducts, createProduct, updateProductById, deleteProductById }
