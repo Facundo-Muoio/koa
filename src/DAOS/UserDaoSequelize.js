@@ -35,7 +35,12 @@ class UserDaoSequelize {
         this.synchronizing()
         const user = await User.findOne({where : { email }})
         return user
-    }   
+    }  
+    
+    async getUsers() {
+        this.synchronizing()
+        return await User.find({})
+    }
     
     async createUser(email, password){
         this.synchronizing()

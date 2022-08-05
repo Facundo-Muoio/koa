@@ -35,6 +35,10 @@ class UsuarioDaoMongoose {
         const user = await User.findOne({email})
         return user
     }
+
+    async getUsers() {
+        return await User.find({})
+    }
     
     async createUser(email, password){
         const newUser = new User()

@@ -20,7 +20,9 @@ require("./passport/local-auth")
 require("dotenv").config()
 const ServerClusterFork  = require("./server/server")
 const cors = require("cors")
-const GraphQLController = require("./graphQL/graphQlController")
+const GraphQLController  = require("./graphQL/graphQlController")
+const graphQL = new GraphQLController
+
 
 //config port with minimist
 const options = {
@@ -68,8 +70,10 @@ app.use((req, res, next) => {
 })
 app.use(cors())
 
+//graphql
+app.use("/graphql", graphQL)
+
 //routes
-app.use("/graphql", new GraphQLController())
 app.use(router)
 
 
@@ -96,5 +100,4 @@ io.on("connection", async (socket) => {
 // httpServer.listen((port),() => console.log(`Server listen on http://${process.env.YOUT_HOST}:${port} - MODE: ${mode}`))
 const server = new ServerClusterFork()
 server[mode](port, httpServer)
-
 module.exports = app
