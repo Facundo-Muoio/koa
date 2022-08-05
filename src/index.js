@@ -20,10 +20,7 @@ require("./passport/local-auth")
 require("dotenv").config()
 const ServerClusterFork  = require("./server/server")
 const cors = require("cors")
-
-
-
-
+const GraphQLController = require("./graphQL/graphQlController")
 
 //config port with minimist
 const options = {
@@ -72,7 +69,9 @@ app.use((req, res, next) => {
 app.use(cors())
 
 //routes
+app.use("/graphql", new GraphQLController())
 app.use(router)
+
 
 
 //socket.io
